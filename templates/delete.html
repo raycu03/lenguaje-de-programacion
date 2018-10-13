@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block titre %}Eliminar un libro{% endblock %}
+
+{% block contenu %}
+
+Quiere eliminar el libro: {{libreria.ISBN}} {{libreria.Nombre}} ?
+<form method="post">
+    <button type="submit" class="btn btn-danger"  value="Submit">Supprimer</button>
+</form>
+{% endblock %}

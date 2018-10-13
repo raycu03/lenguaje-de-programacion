@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block titre %}
+    {% from "_macro.html" import render_field %}
+    <form class="form-inline" name="sentmessage" id="libreriaForm" method="POST">
+        <div class="input-group-append" padding: bottom>
+            {{ render_field(form.search) }}
+        </div>
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-danger";" value="Submit">Buscar</button>
+        </div>
+    </form>
+{% endblock %}
+{% block contenu %}
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Imagen</th>
+            <th scope="col">ISBN</th>
+            <th scope="col">Nombre</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% if se == "" %}
+            {% for libreria in libreria_list %}
+                <tr>
+                    <td>{{libreria.Imagen}}</td>
+                    <td>{{libreria.ISBN}}</td>
+                    <td>{{libreria.Nombre}}</td>
+                    <td>
+                        <a class="btn btn-outline-secondary btn-sm" href="./update/{{libreria.id}}"><i class="fa fa-pencil"></i></a>
+                        <a class="btn btn-outline-secondary btn-sm" href="./delete/{{libreria.id}}"><i class="fa fa-trash"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+        {% if se != "" %}
+            {% for libreria in libreria_list %}
+                {% if se in libreria.Nombre or se == libreria.ISBN %}
+                    <tr>
+                        <td>{{libreria.Imagen}}</td>
+                        <td>{{libreria.ISBN}}</td>
+                        <td>{{libreria.Nombre}}</td>
+                        <td>
+                            <a class="btn btn-outline-secondary btn-sm" href="./update/{{libreria.id}}"><i class="fa fa-pencil"></i></a>
+                            <a class="btn btn-outline-secondary btn-sm" href="./delete/{{libreria.id}}"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </tbody>
+</table>
+<a class="btn btn-secondary" href="./create"><i class="fa fa-plus"></i> Agregar</a>
+{% endblock %}
